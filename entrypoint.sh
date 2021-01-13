@@ -37,5 +37,5 @@ else
   echo "$GITLEAKS_RESULT"
   echo "::set-output name=exitcode::$GITLEAKS_RESULT"
   echo "------------------------------------"
-  echo -e $DONATE_MSG
+  echo "hallo ich bins!"
 fi
