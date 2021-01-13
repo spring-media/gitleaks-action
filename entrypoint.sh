@@ -13,7 +13,7 @@ DONATE_MSG="👋 maintaining gitleaks takes a lot of work so consider sponsoring
 
 if [ "$GITHUB_EVENT_NAME" = "push" ]
 then
-  echo gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commit=$GITHUB_SHA $CONFIG
+  echo gitleaks --path=$GITHUB_WORKSPACE -v 
   CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commit=$GITHUB_SHA $CONFIG)
 elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
 then 
