@@ -19,11 +19,12 @@ then
   echo gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG
   CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG)
 fi
-echo "after if else $?"
+LEAKS_FOUND=$?
+
 echo "$CAPTURE_OUTPUT"
 echo "::set-output name=result::$CAPTURE_OUTPUT"
-echo "after 2 echos $?"
-if [ $? -eq 1 ]
+
+if [ $LEAKS_FOUND -eq 1 ]
 then
   GITLEAKS_RESULT=$(echo -e "\e[31m🛑 STOP! Gitleaks encountered leaks")
   echo "$GITLEAKS_RESULT"
