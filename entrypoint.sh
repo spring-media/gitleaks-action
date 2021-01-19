@@ -12,7 +12,7 @@ echo running gitleaks "$(gitleaks --version) with the following command👇"
 if [ "$GITHUB_EVENT_NAME" = "push" ]
 then
   echo gitleaks --path=$GITHUB_WORKSPACE -v $CONFIG
-  CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE -v $CONFIG)
+  CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE -v --report=gitleaks-report.json $CONFIG)
 elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
 then 
   git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF... > commit_list.txt
