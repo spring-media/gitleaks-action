@@ -11,9 +11,18 @@ echo running gitleaks "$(gitleaks --version) with the following command👇"
 
 if [ "$GITHUB_EVENT_NAME" = "push" ]
 then
-  echo gitleaks --path=$GITHUB_WORKSPACE -v $CONFIG --report=gitleaks-report.json
-  CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE -v $CONFIG)
+  echo gitleaks --path=$GITHUB_WORKSPACE -v --report=gitleaks-report.json $CONFIG
+  CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE -v --report=gitleaks-report.json $CONFIG)
+elif [ "$GITHUB_EVENT_NAME" = "pull_request" ]
+then 
+  git --git-dir="$GITHUB_WORKSPACE/.git" log --left-right --cherry-pick --pretty=format:"%H" remotes/origin/$GITHUB_BASE_REF... > commit_list.txt
+  echo gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG
+  CAPTURE_OUTPUT=$(gitleaks --path=$GITHUB_WORKSPACE --verbose --redact --commits-file=commit_list.txt $CONFIG)
+fi
+LEAKS_FOUND=$?
 
+echo "$CAPTURE_OUTPUT"
+echo "::set-output name=result::$CAPTURE_OUTPUT"
 if [ $LEAKS_FOUND -eq 1 ]
 then
   GITLEAKS_RESULT=$(echo -e "\e[31m🛑 STOP! Gitleaks encountered leaks")
