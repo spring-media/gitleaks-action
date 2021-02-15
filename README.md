@@ -11,7 +11,7 @@ name: gitleaks
 
 on: [push,pull_request]
 
- 
+
 jobs:
   gitleaks:
     runs-on: ubuntu-latest
@@ -21,10 +21,8 @@ jobs:
         fetch-depth: '0'
     - name: gitleaks-action
       uses: spring-media/gitleaks-action@master
-      
     - name: create gitleaks-report
       run: touch gitleaks-report.json
-    - name: Gitleaks report
 ```
 
 ### Using your own .gitleaks.toml configuration
