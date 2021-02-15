@@ -24,6 +24,15 @@ jobs:
     - name: create gitleaks-report
       run: touch gitleaks-report.json
 ```
+### You can export the report like this
+```
+  - name: Gitleaks report
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v2
+      with:
+         name: gitleaks report
+         path: gitleaks-report.json
+```
 
 ### Using your own .gitleaks.toml configuration
 Include a .gitleaks.toml in the root of your repo directory.
