@@ -5,19 +5,26 @@
 Gitleaks Action provides a simple way to run gitleaks in your CI/CD pipeline.
 
 
-### Sample Workflow
+### AS Workflow
 ```
 name: gitleaks
 
 on: [push,pull_request]
 
+ 
 jobs:
   gitleaks:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: '0'
     - name: gitleaks-action
-      uses: zricethezav/gitleaks-action@master
+      uses: spring-media/gitleaks-action@master
+      
+    - name: create gitleaks-report
+      run: touch gitleaks-report.json
+    - name: Gitleaks report
 ```
 
 ### Using your own .gitleaks.toml configuration
@@ -33,7 +40,7 @@ ex:
       with:
         fetch-depth: '0'
     - name: gitleaks-action
-      uses: zricethezav/gitleaks-action@master
+      uses: spring-media/gitleaks-action@master
 ```
 
 using a fetch-depth of '0' clones the entire history. If you want to do a more efficient clone, use '2', but that is not guaranteed to work with pull requests.   
