@@ -6,6 +6,7 @@ Gitleaks Action provides a simple way to run gitleaks in your CI/CD pipeline.
 
 
 ### AS Workflow
+To use this Github you need to 
 ```
 name: gitleaks
 
