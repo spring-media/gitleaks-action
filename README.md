@@ -6,7 +6,11 @@ Gitleaks Action provides a simple way to run gitleaks in your CI/CD pipeline.
 
 
 ### AS Workflow
-To use this Github you need to 
+To use this Github you need to enable Githun Actions in your Repository.
+
+```
+Settings > Actions > Allow all Actions
+```
 ```
 name: gitleaks
 
