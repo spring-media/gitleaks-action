@@ -11,6 +11,8 @@ To use this Github you need to enable Githun Actions in your Repository.
 ```
 Settings > Actions > Allow all Actions
 ```
+Now you need to create an Action in the Action Menu Above.
+
 ```
 name: gitleaks
 
